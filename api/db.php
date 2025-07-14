@@ -123,16 +123,10 @@ private function arraytosql($array){
 }
 
 
-$Title=new DB('title');
-$Ad=new DB('ad');
-$Mvim=new DB('mvim');
-$Image=new DB('image');
-$News=new DB('news');
-$Admin=new DB('admin');
-$Menu=new DB('menu');
-$Bottom=new DB('bottom');
-$Total=new DB('total');
-
-
+$User=new DB('users');
+$User->save(
+['acc'=>'test','pw'=>'5678','email'=>'test@labor.gov.tw']);
+$User->save(['acc'=>'mem01','pw'=>'mem01','email'=>'mem01@labor.gov.tw']);
+$User->save(['acc'=>'mem02','pw'=>'mem02','email'=>'mem02@labor.gov.tw'])
 
 ?>
