@@ -124,9 +124,9 @@ private function arraytosql($array){
 
 
 $User=new DB('users');
-$User->save(
-['acc'=>'test','pw'=>'5678','email'=>'test@labor.gov.tw']);
-$User->save(['acc'=>'mem01','pw'=>'mem01','email'=>'mem01@labor.gov.tw']);
-$User->save(['acc'=>'mem02','pw'=>'mem02','email'=>'mem02@labor.gov.tw'])
+// $User->save(
+// ['acc'=>'test','pw'=>'5678','email'=>'test@labor.gov.tw']);
+// $User->save(['acc'=>'mem01','pw'=>'mem01','email'=>'mem01@labor.gov.tw']);
+// $User->save(['acc'=>'mem02','pw'=>'mem02','email'=>'mem02@labor.gov.tw'])
 
 ?>
