@@ -47,6 +47,24 @@ function all(...$arg){
     return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function sum($col,...$arg){
+    $sql="select sum($col) from $this->table ";
+    if(isset($arg[0])){
+        if(is_array($arg[0])){
+            $tmp=$this->arraytosql($arg[0]);
+            $sql=$sql." where ".join(" AND " , $tmp);
+
+        }else{
+            $sql .= $arg[0];
+        }
+    }
+
+    if(isset($arg[1])){
+        $sql .= $arg[1];
+    }
+
+    return $this->pdo->query($sql)->fetchColumn();
+}
 function count(...$arg){
     $sql="select count(*) from $this->table ";
     if(isset($arg[0])){
@@ -124,9 +142,24 @@ private function arraytosql($array){
 
 
 $User=new DB('users');
+$Visit=new DB('visit');
 // $User->save(
 // ['acc'=>'test','pw'=>'5678','email'=>'test@labor.gov.tw']);
 // $User->save(['acc'=>'mem01','pw'=>'mem01','email'=>'mem01@labor.gov.tw']);
 // $User->save(['acc'=>'mem02','pw'=>'mem02','email'=>'mem02@labor.gov.tw'])
+
+
+if (!isset($_SESSION['visit'])) {
+    $today=$Visit->find(['date'=>date('y-m-d')]);
+    if(empty($today)) {
+        $Visit->save(['date'=>date('y-m-d'),'visit'=>1]);
+        # code...
+    }else{
+        $today['visit']++;
+        $Visit->save($today);
+    }
+
+    $_SESSION['visit']=1;
+}
 
 ?>
