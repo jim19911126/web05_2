@@ -4,15 +4,20 @@
 </div>
 
 <style>
-    .title{
+    .title {
         background-color: bisque;
     }
-    .title:hover{
+
+    .title:hover {
         text-decoration: underline;
-        color: aqua;
     }
-    .content{
+
+    .content {
         background-color: aliceblue;
+    }
+
+    .likes{
+        background-color: azure;
     }
 </style>
 
@@ -36,9 +41,17 @@
             <td class="title"><?= $row['title']; ?></td>
             <td class="content">
                 <div class="short"><?= mb_substr($row['text'], 0, 30); ?></div>
-                <div class="all" style="display: none;"><?=nl2br($row['text']);?></div>
+                <div class="all" style="display: none;"><?= nl2br($row['text']); ?></div>
             </td>
-            <td></td>
+            <td class="likes">
+                <?php
+                if (isset($_SESSION['login'])):
+                ?>
+                <a href="#" onclick=""><img src="./icon/02B03.jpg" alt="讚" style="width: 18px;">讚</a>
+                <?php
+                endif;
+                ?>
+            </td>
         </tr>
 
         <?php
@@ -66,8 +79,8 @@ if ($now + 1 <= $pages) {
 </div>
 
 <script>
-    $(".title").on("click",function name(params) {
+    $(".title").on("click", function name(params) {
         $(this).next().find(".short,.all").toggle();
-        
+
     })
 </script>

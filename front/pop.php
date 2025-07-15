@@ -11,7 +11,6 @@
 
     .title:hover{
         text-decoration: underline;
-        color: aqua;
     }
 
     .content {
@@ -64,7 +63,15 @@
                 </div>
             </td>
             <td class="likes">
-                還沒寫
+                <span>3</span>個人說
+                <img src="./icon/02B03.jpg" alt="讚" style="width: 18px;">
+                <?php
+                if (isset($_SESSION['login'])):
+                ?>
+                <a>讚</a>
+                <?php
+                endif;
+                ?>
             </td>
         </tr>
 
