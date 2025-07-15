@@ -3,10 +3,23 @@
     目前位置：首頁 > 最新文章區
 </div>
 
+<style>
+    .title{
+        background-color: bisque;
+    }
+    .title:hover{
+        text-decoration: underline;
+        color: aqua;
+    }
+    .content{
+        background-color: aliceblue;
+    }
+</style>
+
 <table style="width: 95%; margin:auto">
     <tr class="ct">
-        <td width="30%">標題</td>
-        <td width="50%">內容</td>
+        <td width="30%" class="title">標題</td>
+        <td width="50%" class="content">內容</td>
         <td></td>
     </tr>
 
@@ -20,10 +33,10 @@
     foreach ($rows as $idx => $row):
         ?>
         <tr>
-            <td><?= $row['title']; ?></td>
-            <td>
+            <td class="title"><?= $row['title']; ?></td>
+            <td class="content">
                 <div class="short"><?= mb_substr($row['text'], 0, 30); ?></div>
-                <div class="all"></div>
+                <div class="all" style="display: none;"><?=nl2br($row['text']);?></div>
             </td>
             <td></td>
         </tr>
@@ -51,3 +64,10 @@ if ($now + 1 <= $pages) {
 }
 ?>
 </div>
+
+<script>
+    $(".title").on("click",function name(params) {
+        $(this).next().find(".short,.all").toggle();
+        
+    })
+</script>

@@ -3,11 +3,44 @@
     目前位置：首頁 > 人氣文章區
 </div>
 
+<style>
+    .title {
+        cursor: pointer;
+        background-color: bisque;
+    }
+
+    .title:hover{
+        text-decoration: underline;
+        color: aqua;
+    }
+
+    .content {
+        background-color: aliceblue;
+    }
+
+    .likes {
+        background-color: azure;
+    }
+
+	.pop {
+		
+		background-color: rgba(51, 51, 51, 0.8);
+		color: #FFF;
+		height: 400px;
+		width: 500px;
+		position: fixed;
+		display: none;
+		z-index: 9999;
+		overflow: auto;
+	}
+
+</style>
+
 <table style="width: 95%; margin:auto">
     <tr class="ct">
-        <td width="20%">標題</td>
-        <td width="60%">內容</td>
-        <td>人氣</td>
+        <td width="20%" class="title">標題</td>
+        <td width="60%" class="content">內容</td>
+        <td class="likes">人氣</td>
     </tr>
 
     <?php
@@ -20,17 +53,24 @@
     foreach ($rows as $idx => $row):
         ?>
         <tr>
-            <td><?= $row['title']; ?></td>
-            <td>
+            <td class="title"><?= $row['title']; ?></td>
+            <td class="content">
                 <div class="short"><?= mb_substr($row['text'], 0, 30); ?></div>
-                <div class="all"></div>
+                <div class="all">
+                    <div id="alerr" class="pop">
+                        <h2><?=$Type[$row['type']];?></h2>
+                        <pre id="ssaa"><?=$row['text'];?></pre>
+                    </div>
+                </div>
             </td>
-            <td></td>
+            <td class="likes">
+                還沒寫
+            </td>
         </tr>
 
         <?php
-        endforeach;
-        ?>
+    endforeach;
+    ?>
 </table>
 
 <div>
@@ -53,3 +93,16 @@
     }
     ?>
 </div>
+
+<script>
+    $(".title").hover(
+        function name(params) {
+            $(this).next().find(".pop").show()
+
+        },
+                function name(params) {
+            $(this).next().find(".pop").hide()
+            
+        }
+    )
+</script>
