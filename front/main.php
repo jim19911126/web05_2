@@ -10,20 +10,31 @@
         padding: 5px 10px;
         border: 1px solid;
         margin-left: -1px;
+        background-color: #eee;
+    }
+
+    .tab.active{
+        background-color: white;
+        border-bottom: white;
     }
 
     .post {
-        width: 97%;
+        width: 97.3%;
         padding: 10px;
         height: 300px;
         border: 1px solid black;
         overflow: auto;
+        display: none;
+        margin-top: -1px;
+    }
+    .post.active{
+        display: block;
     }
 </style>
 
 <div class="tabs">
 
-    <div class="tab" id="tab1">健康新知</div>
+    <div class="tab active" id="tab1">健康新知</div>
     <div class="tab" id="tab2">菸害防治</div>
     <div class="tab" id="tab3">癌症防治</div>
     <div class="tab" id="tab4">慢性病防治</div>
@@ -31,7 +42,7 @@
 </div>
 
 <div class="posts">
-    <div class="post" id="post1">
+    <div class="post active" id="post1">
         <h2>健康新知</h2>
         <pre>
 資料來源： 行政院衛生署國民健康局 
@@ -123,3 +134,12 @@
         </pre>
     </div>
 </div>
+<script>
+    $(".tab").on("click",function name(params) {
+        $(".tab").removeClass("active");
+        $(this).addClass("active");
+        let post=$(this).attr('id').replace('tab','post');
+        $(".post").removeClass("active");
+        $("#"+post).addClass("active");
+    })
+</script>
