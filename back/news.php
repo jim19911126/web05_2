@@ -26,6 +26,7 @@
         <td>
             <input type="checkbox" name="del[]" value="<?=$row['id'];?>">
         </td>
+        <input type="hidden" name="id[]" value="<?=$row['id'];?>">
     </tr>
 
     <?php
