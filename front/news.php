@@ -85,11 +85,9 @@ if ($now + 1 <= $pages) {
 
     })
 
-    function good(news) {
-        $.post("./api/good.php", { news }, function (res) {
-            if (res) {
+        function good(news){
+        $.post("./api/good.php",{news},function(){
                 location.reload();
-            }
         })
     }
 </script>

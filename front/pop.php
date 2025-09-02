@@ -9,7 +9,7 @@
         background-color: bisque;
     }
 
-    .title:hover{
+    .title:hover {
         text-decoration: underline;
     }
 
@@ -21,18 +21,17 @@
         background-color: azure;
     }
 
-	.pop {
-		
-		background-color: rgba(51, 51, 51, 0.8);
-		color: #FFF;
-		height: 400px;
-		width: 500px;
-		position: fixed;
-		display: none;
-		z-index: 9999;
-		overflow: auto;
-	}
+    .pop {
 
+        background-color: rgba(51, 51, 51, 0.8);
+        color: #FFF;
+        height: 400px;
+        width: 500px;
+        position: fixed;
+        display: none;
+        z-index: 9999;
+        overflow: auto;
+    }
 </style>
 
 <table style="width: 95%; margin:auto">
@@ -48,7 +47,7 @@
     $pages = ceil($total / $div);
     $now = $_GET['p'] ?? 1;
     $start = ($now - 1) * $div;
-    $rows = $News->all("order by `likes` desc limit $start,$div");
+    $rows = $News->all("order by `good` desc limit $start,$div");
     foreach ($rows as $idx => $row):
         ?>
         <tr>
@@ -57,19 +56,20 @@
                 <div class="short"><?= mb_substr($row['text'], 0, 30); ?></div>
                 <div class="all">
                     <div id="alerr" class="pop">
-                        <h2><?=$Type[$row['type']];?></h2>
-                        <pre id="ssaa"><?=$row['text'];?></pre>
+                        <h2><?= $Type[$row['type']]; ?></h2>
+                        <pre id="ssaa"><?= $row['text']; ?></pre>
                     </div>
                 </div>
             </td>
             <td class="likes">
-                <span>3</span>個人說
+                <span><?= $row['good']; ?></span>個人說
                 <img src="./icon/02B03.jpg" alt="讚" style="width: 18px;">
                 <?php
                 if (isset($_SESSION['login'])):
-                ?>
-                <a>讚</a>
-                <?php
+                    $chk = $Log->count(['news' => $row['id'], 'user' => $_SESSION['login']]);
+                    ?>
+                    <a href="#" onclick="good(<?= $row['id']; ?>)"><?= ($chk) ? '-收回讚' : '-讚'; ?></a>
+                    <?php
                 endif;
                 ?>
             </td>
@@ -107,9 +107,15 @@
             $(this).next().find(".pop").show()
 
         },
-                function name(params) {
+        function name(params) {
             $(this).next().find(".pop").hide()
-            
+
         }
     )
+
+        function good(news){
+        $.post("./api/good.php",{news},function(){
+                location.reload();
+        })
+    }
 </script>
